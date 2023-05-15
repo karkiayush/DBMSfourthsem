@@ -1,2 +1,277 @@
 show databases;
-use fourthdb 
+use database fourthdb;
+
+Q1: 
+create table countries ( country_id varchar(2), country_name varchar(40), region_id decimal(10,0));
+
+Q2:
+create table jobs (job_id varchar(10) NOT NULL, 
+    -> JOB_TITLE varchar(35) NOT NULL, 
+    -> MIN_SALARY decimal(6,0),
+    -> MAX_SALARY DECIMAL(6,0),
+    -> CHECK(MAX_SALARY<=25000) /*make sure that max salary must be lesss than 25k;*/
+    -> );
+
+Q3:
+mysql> create table job_history(
+    -> employee_id decimal(6,0) not null,
+    -> start_date date not null, 
+    -> end_date date not null,
+    -> check(end_date like '--/--/---'),
+    -> jod_id varchar(10) not null,
+    -> department_id decimal(4,0) not null);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc job_history;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| employee_id   | decimal(6,0) | NO   |     | NULL    |       |
+| start_date    | date         | NO   |     | NULL    |       |
+| end_date      | date         | NO   |     | NULL    |       |
+| jod_id        | varchar(10)  | NO   |     | NULL    |       |
+| department_id | decimal(4,0) | NO   |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+Q4:
+mysql> insert into countries values('11', 'Nepal', 1010101010);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from countries;
++------------+--------------+------------+
+| country_id | country_name | region_id  |
++------------+--------------+------------+
+| 11         | Nepal        | 1010101010 |
++------------+--------------+------------+
+
+Q5:
+insert into countries(country_id, country_name)  values('01', 'Australia');
+select * from countries;
++------------+--------------+------------+
+| country_id | country_name | region_id  |
++------------+--------------+------------+
+| 11         | Nepal        | 1010101010 |
+| 01         | Australia    |       NULL |
++------------+--------------+------------+
+
+Q6:
+insert into countries values('c5', 'USA', 200101),('r2', 'Germany', 12451),('Q5', 'Denmark', 102222);
+mysql> select * from countries;
++------------+--------------+------------+
+| country_id | country_name | region_id  |
++------------+--------------+------------+
+| 11         | Nepal        | 1010101010 |
+| 01         | Australia    |       NULL |
+| c5         | USA          |     200101 |
+| r2         | Germany      |      12451 |
+| Q5         | Denmark      |     102222 |
++------------+--------------+------------+
+
+Q7:
+alter table countries rename country_new;
+mysql> show tables;
++-------------------------+
+| Tables_in_fourth_sem_db |
++-------------------------+
+| country_new             |
+| job_history             |
+| jobs                    |
+| lab_information         |
+| project                 |
++-------------------------+
+mysql> desc country_new;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| country_id   | varchar(2)    | YES  |     | NULL    |       |
+| country_name | varchar(40)   | YES  |     | NULL    |       |
+| region_id    | decimal(10,0) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+
+Q8:
+
+
+decimal(10, 0) => means the only 10 digits are allowed before decimal points and after decimal no digits can be there. 
+
+CHECK(MAX_SALARY<=25000) : makes sure that max salary must be less than 25000.
+
+
+
+All Queries :
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| fourth_sem_db      |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> use fourth_sem_db;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_fourth_sem_db |
++-------------------------+
+| lab_information         |
+| project                 |
++-------------------------+
+2 rows in set (0.00 sec)
+
+mysql> create table countries ( country_id int, country_name varchar(40), region_id int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | YES  |     | NULL    |       |
+| country_name | varchar(40) | YES  |     | NULL    |       |
+| region_id    | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table countries column country_id varchar(2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column country_id varchar(2)' at line 1
+mysql> ALTER TABLE countries MODIFY COLUMN country_id VARCHAR(2);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | varchar(2)  | YES  |     | NULL    |       |
+| country_name | varchar(40) | YES  |     | NULL    |       |
+| region_id    | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE countries MODIFY COLUMN region_id DECIMAL(10,0);
+ 
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC countries;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| country_id   | varchar(2)    | YES  |     | NULL    |       |
+| country_name | varchar(40)   | YES  |     | NULL    |       |
+| region_id    | decimal(10,0) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table jobs (job_id varchar(10) NOT NULL, 
+    -> JOB_TITLE varchar(35) NOT NULL, 
+mysql> create table job_history(
+    -> employee_id decimal(6,0) not null,
+    -> start_date date not null, 
+    -> end_date date not null,
+    -> check(end_date like '--/--/---'),
+    -> jod_id varchar(10) not null,
+    -> department_id decimal(4,0) not null);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc job_history;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| employee_id   | decimal(6,0) | NO   |     | NULL    |       |
+| start_date    | date         | NO   |     | NULL    |       |
+| end_date      | date         | NO   |     | NULL    |       |
+| jod_id        | varchar(10)  | NO   |     | NULL    |       |
+| department_id | decimal(4,0) | NO   |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into countries values('111', 'Nepal', 1010101010);
+ERROR 1406 (22001): Data too long for column 'country_id' at row 1
+mysql> insert into countries values('11', 'Nepal', 1010101010);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from countries;
++------------+--------------+------------+
+| country_id | country_name | region_id  |
++------------+--------------+------------+
+| 11         | Nepal        | 1010101010 |
++------------+--------------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into countries values('01', 'Australia');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into countries(country_id, country_name)  values('01'
+, 'Australia');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc contries;
+ERROR 1146 (42S02): Table 'fourth_sem_db.contries' doesn't exist
+mysql> select schema();
++---------------+
+| schema()      |
++---------------+
+| fourth_sem_db |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> show * from countries;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from countries' at line 1
+mysql> select * from countries;
++------------+--------------+------------+
+| country_id | country_name | region_id  |
++------------+--------------+------------+
+| 11         | Nepal        | 1010101010 |
+| 01         | Australia    |       NULL |
++------------+--------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into countries values('c5', 'USA', 200101),('r2', 'Ge
+rmany', 12451),('Q5', 'Denmark', 102222);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from countries;
++------------+--------------+------------+
+| country_id | country_name | region_id  |
++------------+--------------+------------+
+| 11         | Nepal        | 1010101010 |
+| 01         | Australia    |       NULL |
+| c5         | USA          |     200101 |
+| r2         | Germany      |      12451 |
+| Q5         | Denmark      |     102222 |
++------------+--------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table countries rename country_new;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_fourth_sem_db |
++-------------------------+
+| country_new             |
+| job_history             |
+| jobs                    |
+| lab_information         |
+| project                 |
++-------------------------+
+5 rows in set (0.00 sec)
+
+mysql> desc country_new;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| country_id   | varchar(2)    | YES  |     | NULL    |       |
+| country_name | varchar(40)   | YES  |     | NULL    |       |
+| region_id    | decimal(10,0) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> 
