@@ -1,0 +1,17 @@
+mysql -u root -p : gives the access to enter
+
+create database database_name;
+
+drop database database_name;
+
+show databases; to see the databases
+
+use database_name; to use that database
+
+create table table_name(schema_name datatype,....); create table inside of db
+
+show tables; display available tables.
+
+show field from table_name; to describe the whole table
+
+select database() or select schema(); show db in which we are at present;
