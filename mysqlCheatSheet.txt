@@ -15,3 +15,37 @@ show tables; display available tables.
 show field from table_name; to describe the whole table
 
 select database() or select schema(); show db in which we are at present;
+
+
+There are 3 data types in mysql : 
+    a> numeric 
+    b> strings
+    c> Date&time
+     
+insert into lab_information (sn, lab_title , lab_date , remarks ) values (2, 'demo', 19, 'excellent'), (3, 'java', 22, 'good'),(4, 'C#', 11, 'p
+oor');
+
+insert into lab_information values (2, 'demo', 19, 'excellent'), (3, 'java', 22, 'good'),(4, 'C#', 11, 'p
+oor');
+
+
+show warnings; => show the warnings in the terminal 
+
+Null vs Not Null :
+    NULL means the value in not known. 
+    NOT NULL means values has to be entered.
+
+DEFAULT VALUE : DEFAULT 100, 
+
+ALTER: alter is used to add or delete the columns in the table
+eg: alter table table_name add col_name datatype;
+    alter table table_name drop column col_name datatype;
+
+primary key:  primary key constraints uniquely identifies each record in the table. Primary key must contains UNIQUE values, and cannot contain null values. eg: 
+    create table table_name (
+        col_name dt, col_name   dt, col_name dt, primary key(col_name)
+    );
+
+
+    AUTO_INCREMENT to auto  increment the value;
+     
