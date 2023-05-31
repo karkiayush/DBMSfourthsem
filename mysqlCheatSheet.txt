@@ -25,8 +25,7 @@ There are 3 data types in mysql :
 insert into lab_information (sn, lab_title , lab_date , remarks ) values (2, 'demo', 19, 'excellent'), (3, 'java', 22, 'good'),(4, 'C#', 11, 'p
 oor');
 
-insert into lab_information values (2, 'demo', 19, 'excellent'), (3, 'java', 22, 'good'),(4, 'C#', 11, 'p
-oor');
+insert into lab_information values (2, 'demo', 19, 'excellent'), (3, 'java', 22, 'good'),(4, 'C#', 11, 'poor');
 
 
 show warnings; => show the warnings in the terminal 
@@ -49,3 +48,5 @@ primary key:  primary key constraints uniquely identifies each record in the tab
 
     AUTO_INCREMENT to auto  increment the value;
      
+
+     SmithyAayush9861#49

@@ -1,0 +1,1 @@
+//what is NOT NULL in mysql?
