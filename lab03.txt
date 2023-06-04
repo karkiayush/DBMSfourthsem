@@ -1,0 +1,9 @@
+CREATE TABLE second_table (
+  id INT PRIMARY KEY,
+  foreign_key_id INT,
+  other_columns...
+);
+
+
+ALTER TABLE second_table
+ADD FOREIGN KEY (foreign_key_id) REFERENCES first_table(primary_key_column);

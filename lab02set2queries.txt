@@ -1,27 +1,47 @@
-create table emp_time(
-    -> eid varchar(20),
-    -> name varchar(20),
-    -> start_time TIME,
-    -> end_time TIME);
+mysql> select * from student;
++----+--------+------------+
+| id | f_name | l_name     |
++----+--------+------------+
+|  1 | Steven | Smith      |
+|  2 | Joe    | Root       |
+|  3 | Kane   | Williamson |
+|  4 | Brian  | Lara       |
+|  5 | Ricky  | Ponting    |
++----+--------+------------+
+5 rows in set (0.00 sec)
 
+mysql> select * from teacher;
++--------+-------------------+
+| id     | name              |
++--------+-------------------+
+| 200101 | Jay Ram Subedi    |
+| 200102 | Kusal Bhattarai   |
+| 200103 | Chiranjibi Pandey |
+| 200104 | David J Malan     |
+| 200105 | Robert Key        |
++--------+-------------------+
+5 rows in set (0.00 sec)
 
+mysql> select * from course;
++-----------+------------------+
+| course_id | title            |
++-----------+------------------+
+|       111 | Computer science |
+|       112 | Ethical Hacking  |
+|       113 | Machine Learning |
+|       114 | Java Programming |
+|       115 | Web Development  |
++-----------+------------------+
+5 rows in set (0.00 sec)
 
-insert into emp_time values(
-    -> 'e101', 'Mangale', '10:30', '18:30'),
-    -> ('e102','Malati','8:30','14:30'),
-    -> ('e103','Fulmaya','9:00','18:00');
-
-
-select name from emp_time where name like 'M%' and timediff(end_time, start_time)>'07:00:00';
-+---------+
-| name    |
-+---------+
-| Mangale |
-+---------+
-
-
-truncate table emp_time;
-insert into emp_time values
-    -> ('E107','Kamale','10:00','17:00'); 
-
-    
+mysql> select * from enrollment;
++----------+------------+------------+-----------+
+| date_en  | student_id | teacher_id | course_id |
++----------+------------+------------+-----------+
+| 20171113 |          2 |     200103 |       113 |
+| 20191214 |          1 |     200101 |       111 |
+| 20210307 |          1 |     200105 |       114 |
+| 20221129 |          4 |     200104 |       112 |
+| 20221130 |          3 |     200101 |       111 |
++----------+------------+------------+-----------+
+5 rows in set (0.00 sec)
