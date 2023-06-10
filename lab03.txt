@@ -7,3 +7,12 @@ CREATE TABLE second_table (
 
 ALTER TABLE second_table
 ADD FOREIGN KEY (foreign_key_id) REFERENCES first_table(primary_key_column);
+
+
+
+CREATE TABLE enrollmenting (student_id INT,teacher_id INT,course_id INT,
+       date_enrollment DATE,
+       PRIMARY KEY (student_id, teacher_id, course_id),
+       FOREIGN KEY (student_id) REFERENCES student(id),
+       FOREIGN KEY (teacher_id) REFERENCES teacher(id),
+       FOREIGN KEY (course_id) REFERENCES course(course_id) );
