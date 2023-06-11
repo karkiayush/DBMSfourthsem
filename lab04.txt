@@ -1,0 +1,106 @@
+create database company;
+use company;
+create table employees ( id int primary key not null, Name varchar(30), Department int );
+ insert into employees value (1, "John", 1),(2,"Sarah",2), (3, "Michael", 1),(4,"Jessica", 3);
+create table departments(id int primary key not null, Department varcha
+r(20));
+insert into departments values(1, "Sales"),(2,"Marketing"),(3,"Operatio
+ns");
+
+create table customers ( id int primary key not null, Name varchar(20))
+;
+
+insert into customers values(1,"Emma"), (2,"David"), (3,"Sarah");
+select employees.id, employees.Name, employees.Department, departments.
+Department from employees inner join departments on employees.department=depar
+tments.id;
+
+ SELECT  employees.id, employees.Name, employees.Department, departments
+.Department FROM employees LEFT JOIN departments ON employees.department=depar
+tments.id;
++----+---------+------------+------------+
+| id | Name    | Department | Department |
++----+---------+------------+------------+
+|  1 | John    |          1 | Sales      |
+|  2 | Sarah   |          2 | Marketing  |
+|  3 | Michael |          1 | Sales      |
+|  4 | Jessica |          3 | Operations |
+|  5 | Heath   |          4 | NULL       |
++----+---------+------------+------------+
+
+
+select departments.id, departments.Department, employees.id, employees.Name from departments right join employees on departments.id=employees.department;
++------+------------+----+---------+
+| id   | Department | id | Name    |
++------+------------+----+---------+
+|    1 | Sales      |  1 | John    |
+|    2 | Marketing  |  2 | Sarah   |
+|    1 | Sales      |  3 | Michael |
+|    3 | Operations |  4 | Jessica |
+| NULL | NULL       |  5 | Heath   |
+| NULL | NULL       |  6 | NULL    |
++------+------------+----+---------+
+
+SELECT employees.id, employees.Name, employees.Department, departments.id, departments.Department
+    -> FROM employees
+    -> LEFT JOIN departments ON employees.Department = departments.id
+    -> UNION
+    -> SELECT employees.id, employees.Name, employees.Department, departments.id, departments.Department
+    -> FROM employees
+    -> RIGHT JOIN departments ON employees.Department = departments.id;
++------+---------+------------+------+-------------+
+| id   | Name    | Department | id   | Department  |
++------+---------+------------+------+-------------+
+|    1 | John    |          1 |    1 | Sales       |
+|    2 | Sarah   |          2 |    2 | Marketing   |
+|    3 | Michael |          1 |    1 | Sales       |
+|    4 | Jessica |          3 |    3 | Operations  |
+|    5 | Heath   |          4 | NULL | NULL        |
+|    6 | NULL    |          6 | NULL | NULL        |
+| NULL | NULL    |       NULL |    5 | Programming |
++------+---------+------------+------+-------------+
+
+
+select name from employees union all select name from customers; 
++---------+
+| name    |
++---------+
+| John    |
+| Sarah   |
+| Michael |
+| Jessica |
+| Heath   |
+| NULL    |
+| Emma    |
+| David   |
+| Sarah   |
++---------+
+
+select Name from employees where Name in (select Name from customers);
++-------+
+| Name  |
++-------+
+| Sarah |
++-------+
+
+select Name from employees except select Name from customers;
++---------+
+| Name    |
++---------+
+| John    |
+| Michael |
+| Jessica |
+| Heath   |
+| NULL    |
++---------+
+
+
+ select Name from customers except select Name from employees; 
++-------+
+| Name  |
++-------+
+| Emma  |
+| David |
++-------+
+
+
