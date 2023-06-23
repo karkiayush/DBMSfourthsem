@@ -1,0 +1,89 @@
+create table employees (ID int, Name varchar(20), Department int);
+INSERT INTO employees VALUES (1, 'John', 1), (2, 'Sarah', 2), (3, 'Michael', 1), (4, 'Jessica', 3);
+
+create table departments (ID int, Department varchar(20));
+insert into departments values (1,'Sales'), (2,'Marketing'), (3,'Opera
+tions');
+
+ CREATE TABLE customers (ID int , Name varchar(20));
+ INSERT INTO customers VALUES (1,'Emma'), (2,'David'), (3,'Sarah');
+
+
+<-----------First Soln---------------------------->
+ Qno1: Here inner join is used since there exists no common attribute betweeen the employees and departments table
+
+ SELECT employees.ID, employees.Name, employees.Department, departments
+.Department from employees inner join departments where employees.Department=departments.ID;
++------+---------+------------+------------+
+| ID   | Name    | Department | Department |
++------+---------+------------+------------+
+|    1 | John    |          1 | Sales      |
+|    2 | Sarah   |          2 | Marketing  |
+|    3 | Michael |          1 | Sales      |
+|    4 | Jessica |          3 | Operations |
++------+---------+------------+------------+
+
+
+
+
+<------------------------Second Soln--------------------------->
+since here we are said to display the info of the employee who have their own dept and also those emp who don't have dept
+
+select employees.ID, employees.Name,employees.Department, departments.ID,departments.Department from employees left outer join departments on employees.Department = departments.ID; 
++------+---------+------------+------+------------+
+| ID   | Name    | Department | ID   | Department |
++------+---------+------------+------+------------+
+|    1 | John    |          1 |    1 | Sales      |
+|    2 | Sarah   |          2 |    2 | Marketing  |
+|    3 | Michael |          1 |    1 | Sales      |
+|    4 | Jessica |          3 |    3 | Operations |
+|    5 | Will    |       NULL | NULL | NULL       |
++------+---------+------------+------+------------+
+
+
+
+
+<--------------------Third Soln--------------------------->
+ select departments.ID, departments.Department, employees.ID,employees.Name, employees.Department from departments right outer join employees on departments.ID=employees.Department; 
++------+------------+------+---------+------------+
+| ID   | Department | ID   | Name    | Department |
++------+------------+------+---------+------------+
+|    1 | Sales      |    1 | John    |          1 |
+|    2 | Marketing  |    2 | Sarah   |          2 |
+|    1 | Sales      |    3 | Michael |          1 |
+|    3 | Operations |    4 | Jessica |          3 |
+| NULL | NULL       |    5 | Will    |       NULL |
++------+------------+------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select departments.ID, departments.Department, employees.ID,employees.Name from departments right outer join employees on departments.ID=employees.Department;                       
++------+------------+------+---------+
+| ID   | Department | ID   | Name    |
++------+------------+------+---------+
+|    1 | Sales      |    1 | John    |
+|    2 | Marketing  |    2 | Sarah   |
+|    1 | Sales      |    3 | Michael |
+|    3 | Operations |    4 | Jessica |
+| NULL | NULL       |    5 | Will    |
++------+------------+------+---------+
+
+
+
+<-------------------Fifth Soln-------------------------->
+ SELECT employees.ID, employees.Name, employees.Department, departments.ID, departments.Department
+    -> FROM employees
+    -> LEFT JOIN departments ON employees.Department = departments.ID
+    -> UNION
+    -> SELECT employees.ID, employees.Name, employees.Department, departments.ID, departments.Department
+    -> FROM employees
+    -> RIGHT JOIN departments ON employees.Department = departments.ID;
++------+---------+------------+------+----------------------+
+| ID   | Name    | Department | ID   | Department           |
++------+---------+------------+------+----------------------+
+|    1 | John    |          1 |    1 | Sales                |
+|    2 | Sarah   |          2 |    2 | Marketing            |
+|    3 | Michael |          1 |    1 | Sales                |
+|    4 | Jessica |          3 |    3 | Operations           |
+|    5 | Will    |       NULL | NULL | NULL                 |
+| NULL | NULL    |       NULL |    4 | Software Development |
++------+---------+------------+------+----------------------+

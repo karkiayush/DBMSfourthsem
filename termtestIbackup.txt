@@ -1,0 +1,20 @@
+select * from Customers;
++-------------+----------------+--------------------+
+| customer_id | name           | email              |
++-------------+----------------+--------------------+
+|           1 | John Doe       | john@example.com   |
+|           2 | Jane Smith     | jane@example.com   |
+|           3 | Robert Johnson | robert@example.com |
++-------------+----------------+--------------------+
+
+
+
+mysql> select * from orders;
++----------+-------------+-----------+----------+
+| order_id | customer_id | product   | quantity |
++----------+-------------+-----------+----------+
+|        1 |           1 | Product A |        5 |
+|        2 |           2 | Product B |        3 |
+|        3 |           1 | Product C |        2 |
+|        4 |           3 | Product A |        1 |
++----------+-------------+-----------+----------+
